@@ -1,0 +1,32 @@
+# This is Git's per-user configuration file.
+[user]
+	name = AUTHOR
+	email = EMAIL
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[diff]
+    tool = vimdiff
+[merge]
+    tool = vimdiff
+[alias]
+    b = branch
+    bc = checkout -b
+    bd = branch -D
+
+    co = checkout
+    cm = checkout master
+    s = status
+    f = fetch
+    m = merge
+    mom = merge origin/master
+
+    ca = commit --all -v
+    cm = commit --message
+    cam = commit --all --message
+
+
+    l = log --oneline
+

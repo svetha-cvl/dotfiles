@@ -1,0 +1,22 @@
+-- Don't display helpful message on startup
+\set QUIET 1
+
+\set COMP_KEYWORD_CASE upper
+
+\pset null '(null)'
+
+\timing
+
+\x auto
+
+\set VERBOSITY verbose
+
+-- https://www.postgresql.org/docs/11/app-psql.html#APP-PSQL-PROMPTING
+-- %m is the database server
+-- %n is the session user name
+-- %/ is the database name
+-- %# is # if superuser, > otherwise
+\set PROMPT1 '%m %n@%/%# '
+
+-- Enable helpful messages after startup
+\unset QUIET

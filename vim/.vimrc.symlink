@@ -1,0 +1,71 @@
+set nocompatible "be iMproved, required
+filetype off "required for Vundle
+
+"Set runtime path to include Vundle and initialise"
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"Add all plugins in this block
+
+    "https://github.com/preservim/nerdtree
+    Plugin 'preservim/nerdtree'
+
+    "https://github.com/tpope/vim-fugitive
+    Plugin 'https://tpope.io/vim/fugitive.git'
+
+    "https://github.com/junegunn/fzf/blob/master/README-VIM.md
+    Plugin 'junegunn/fzf'
+call vundle#end() "required
+filetype plugin indent on "required
+
+"Map ctrl+p to fuzzy find files"
+nnoremap <c-p> :FZF<CR>
+
+"Remap window and split navigation, just a little easier"
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+
+"Show cursor position"
+set ruler
+
+syntax on
+set tabstop=4       
+set shiftwidth=4 
+set softtabstop=4   
+set expandtab
+
+"Setting both number and relative number shows the actual line number for the current line (where cursor is located) and the relative number for the other lines.
+set number
+set relativenumber
+
+"Show status bar always
+set laststatus=2
+
+"Allow hidden buffers, ie buffers outside of any windows with unsaved text.
+"This does mean that we can exit vim and unsaved changes will be lost!
+set hidden
+
+"Search is case-insensitive if the search text is all lower-case. It also becomes case-sensitive if the search text has any upper-case characters.
+set ignorecase
+set smartcase
+
+"Turn on incremental search, ie search as the search text is being typed.
+set incsearch
+
+"Highlight search results. :set nohlsearch if this is overwhelming visually.
+set hlsearch
+
+"Indent"
+set autoindent
+"filetype plugin indent on
+
+"Turn off audio bell for errors. This can get annoying. Use a visual bell instead.
+"Turn off flash for the visual bell
+set noerrorbells visualbell t_vb=
+
+"Show boundary of permissible screen width
+set colorcolumn=80
+"Set boundary column colour
+highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+
