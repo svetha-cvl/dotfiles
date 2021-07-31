@@ -17,6 +17,9 @@ call vundle#begin()
 call vundle#end() "required
 filetype plugin indent on "required
 
+"Remap most used NERDTree commands"
+nnoremap <Leader>n :NERDTreeToggle<CR>
+
 "Map ctrl+p to fuzzy find files"
 nnoremap <c-p> :FZF<CR>
 
