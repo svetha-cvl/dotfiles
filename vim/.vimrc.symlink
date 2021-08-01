@@ -14,6 +14,9 @@ call vundle#begin()
 
     "https://github.com/junegunn/fzf/blob/master/README-VIM.md
     Plugin 'junegunn/fzf'
+
+    "https://github.com/tpope/vim-commentary"
+    Plugin 'https://tpope.io/vim/commentary.git'
 call vundle#end() "required
 filetype plugin indent on "required
 
