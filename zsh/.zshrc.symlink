@@ -2,8 +2,8 @@ source ~/.bash_profile
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/Svetha/.oh-my-zsh"
+# Assuming oh-my-zsh is installed in the user directory
+export ZSH="/Users/$(whoami)/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -101,3 +101,11 @@ source $ZSH/oh-my-zsh.sh
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Autoload functions
+# Replace DOTFILES_ROOT with your path
+FUNCTIONS_DIR=DOTFILES_ROOT/functions
+fpath=($FUNCTIONS_DIR $fpath)
+for function in $FUNCTIONS_DIR/*; do
+    autoload $(basename $function)
+done

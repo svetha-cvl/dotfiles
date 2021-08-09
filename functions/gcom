@@ -1,0 +1,11 @@
+function gcom() {
+    git branch | grep -q main
+    
+    if [[ $? -eq 0 ]]; then
+        git checkout main;
+    else
+        git checkout master;
+    fi;
+}
+
+
