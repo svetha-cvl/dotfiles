@@ -34,6 +34,8 @@ nnoremap <c-h> <c-w>h
 
 "Show cursor position"
 set ruler
+"Set scroll offset to avoid hitting the last line before scrolling"
+set scrolloff=3
 
 syntax on
 set tabstop=4       
