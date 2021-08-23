@@ -113,3 +113,5 @@ done
 
 # Bash autocompletion
 fpath=(DOTFILES_ROOT/zsh $fpath)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
