@@ -15,10 +15,19 @@ call vundle#begin()
     "https://github.com/junegunn/fzf/blob/master/README-VIM.md
     Plugin 'junegunn/fzf'
 
-    "https://github.com/tpope/vim-commentary"
+    "https://github.com/tpope/vim-commentary
     Plugin 'https://tpope.io/vim/commentary.git'
+
+    " https://github.com/neoclide/coc.nvim
+    Plugin 'neoclide/coc.nvim'
+
+    "https://github.com/fatih/vim-go
+    Plugin 'fatih/vim-go'
 call vundle#end() "required
 filetype plugin indent on "required
+
+"Remap leader
+let mapleader = ","
 
 "Remap most used NERDTree commands"
 nnoremap <Leader>n :NERDTreeToggle<CR>
@@ -31,6 +40,27 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
+
+"Automatically write the content of the buffer if you call :make
+"Especially useful for :GoBuild, saves an explicit write operation
+set autowrite
+
+"Remap vim-go commands
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+
+"g:go_fmt_autosave is enabled by default
+let g:go_fmt_command = "goimports"
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 
 "Show cursor position"
 set ruler
