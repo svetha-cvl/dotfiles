@@ -1,4 +1,5 @@
 source ~/.bash_profile
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -109,3 +110,6 @@ fpath=($FUNCTIONS_DIR $fpath)
 for function in $FUNCTIONS_DIR/*; do
     autoload $(basename $function)
 done
+
+# Bash autocompletion
+fpath=(DOTFILES_ROOT/zsh $fpath)
