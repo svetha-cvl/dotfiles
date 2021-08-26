@@ -23,6 +23,9 @@ call vundle#begin()
 
     "https://github.com/fatih/vim-go
     Plugin 'fatih/vim-go'
+
+    "https://github.com/tpope/vim-fireplace
+    Plugin 'https://tpope.io/vim/fireplace.git'
 call vundle#end() "required
 filetype plugin indent on "required
 
