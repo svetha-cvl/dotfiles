@@ -1,0 +1,15 @@
+function gccd() {
+    git clone "$@"
+
+    last_arg="${@: -1}"
+
+    if [[ "$last_arg" == *".git"* ]]; then
+        clone_dir=$(basename "$last_arg" .git)
+        cd "$clone_dir" ;
+    else
+        cd "$last_arg" ;
+    fi;
+}
+
+
+
