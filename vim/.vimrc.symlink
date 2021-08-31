@@ -61,7 +61,7 @@ let g:go_fmt_command = "goimports"
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 
@@ -79,6 +79,12 @@ set expandtab
 "Setting both number and relative number shows the actual line number for the current line (where cursor is located) and the relative number for the other lines.
 set number
 set relativenumber
+"Toggle line numbers
+nnoremap <leader>ln :set number!<CR>
+nnoremap <leader>lrn :set relativenumber!<CR>
+"Toggle cursor line
+nnoremap <leader>lc :set cursorline!<CR>
+
 
 "Show status bar always
 set laststatus=2
@@ -99,7 +105,7 @@ set hlsearch
 
 "Indent"
 set autoindent
-"filetype plugin indent on
+" filetype plugin indent on
 
 "Turn off audio bell for errors. This can get annoying. Use a visual bell instead.
 "Turn off flash for the visual bell
