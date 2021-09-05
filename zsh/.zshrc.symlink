@@ -115,5 +115,6 @@ done
 
 # Bash autocompletion
 fpath=(DOTFILES_ROOT/zsh $fpath)
+source <(kubectl completion zsh)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
