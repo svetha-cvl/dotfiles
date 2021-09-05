@@ -85,6 +85,8 @@ nnoremap <leader>lrn :set relativenumber!<CR>
 "Toggle cursor line
 nnoremap <leader>lc :set cursorline!<CR>
 
+"Increment/decrement letters (useful for lists).
+set nrformats+=alpha
 
 "Show status bar always
 set laststatus=2
