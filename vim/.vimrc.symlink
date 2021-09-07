@@ -102,6 +102,9 @@ set smartcase
 "Turn on incremental search, ie search as the search text is being typed.
 set incsearch
 
+"Reselect pasted text
+nnoremap gp `[v`]
+
 "Highlight search results. :set nohlsearch if this is overwhelming visually.
 set hlsearch
 
