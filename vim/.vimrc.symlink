@@ -29,6 +29,8 @@ call vundle#begin()
 call vundle#end() "required
 filetype plugin indent on "required
 
+set noswapfile
+
 "Remap leader
 let mapleader = ","
 
@@ -84,6 +86,9 @@ nnoremap <leader>ln :set number!<CR>
 nnoremap <leader>lrn :set relativenumber!<CR>
 "Toggle cursor line
 nnoremap <leader>lc :set cursorline!<CR>
+
+"Show whitespaces
+set list
 
 "Increment/decrement letters (useful for lists).
 set nrformats+=alpha

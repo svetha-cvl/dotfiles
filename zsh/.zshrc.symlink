@@ -117,4 +117,15 @@ done
 fpath=(DOTFILES_ROOT/zsh $fpath)
 source <(kubectl completion zsh)
 
+# fuzzy file search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# hstr - better command history search
+# https://github.com/dvorka/hstr/tree/6507ac7f9518b896809d7eee3edcaaad94769d18
+hstr --show-configuration >> ~/.zshrc
+
+# HSTR configuration - add this to ~/.zshrc
+alias hh=hstr                    # hh to be alias for hstr
+setopt histignorespace           # skip cmds w/ leading space from history
+export HSTR_CONFIG=hicolor       # get more colors
+bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
