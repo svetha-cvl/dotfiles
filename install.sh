@@ -27,4 +27,5 @@ ln $DOTFILES_ROOT/vim/.vimrc.symlink ~/.vimrc
 ln $DOTFILES_ROOT/vim/coc-settings.json ~/.config/nvim/coc-settings.json
 ln $DOTFILES_ROOT/vim/init.vim ~/.config/nvim/init.vim
 
+ln $DOTFILES_ROOT/zsh/.p10k.zsh ~/.p10k.zsh
 ln $DOTFILES_ROOT/zsh/.zshrc.local.symlink ~/.zshrc
