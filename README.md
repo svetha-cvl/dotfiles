@@ -13,6 +13,7 @@ Run `install.sh` and get going.
 - `nodejs` for the language server configurations for the `coc.vim` plugin.
     - NOTE: The default master branch for `coc.vim` does not come with precompiled binaries, unlike the `release` branch. The vim plugin manager I use (`vundle`) unfortunately does not support pinning branches or tags at the moment. A workaround is to manually compile the necessary dependencies using `yarn build && yarn install` from `~/.vim/bundle/coc.nvim`, or manually check out a different branch.
 - `kubectl` for kubectl autocompletion.
+- `timewarrior` ([Reference](https://timewarrior.net/))
 
 ##### To use coc.vim
 - `gopls` for the Go language server
