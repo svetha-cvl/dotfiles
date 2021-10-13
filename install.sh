@@ -3,13 +3,12 @@
 DOTFILES_ROOT=$(pwd -P)
 
 if ! test -f git/.gitconfig.local.symlink; then
-    echo 'What is your git user name?'
-    read -e git_author
+    read -p 'What is your git user name?' git_author
+    read -p 'What is your personal git email?' git_personal_email
+    read -p 'What is your work git email?' git_work_email
 
-    echo 'What is your git email?'
-    read -e git_email
-
-    sed -e "s/AUTHOR/$git_author/g" -e "s/EMAIL/$git_email/g" git/.gitconfig.symlink > git/.gitconfig.local.symlink
+    sed -e "s/AUTHOR/$git_author/g" -e "s/PERSONAL_EMAIL/$git_personal_email/g" git/.gitconfig.symlink > git/.gitconfig.local.symlink
+    sed -e "s/AUTHOR/$git_author/g" -e "s/WORK_EMAIL/$git_work_email/g" git/.gitconfig-work.symlink > git/.gitconfig-work.local.symlink
 fi
 
 sed -e "s=DOTFILES_ROOT=${DOTFILES_ROOT}=g" zsh/.zshrc.symlink > zsh/.zshrc.local.symlink
