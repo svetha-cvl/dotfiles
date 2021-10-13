@@ -1,7 +1,9 @@
 # This is Git's per-user configuration file.
 [user]
 	name = AUTHOR
-	email = EMAIL
+	email = PERSONAL_EMAIL
+[includeIf "gitdir:~/dev/work/*"]
+    path = ~/.gitconfig-work
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -14,7 +16,7 @@
 [alias]
     b = branch
     bc = checkout -b
-    bd = branch -D
+    bD = branch -D
 
     co = checkout
     cm = checkout master
