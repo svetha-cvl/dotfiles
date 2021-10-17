@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 DOTFILES_ROOT=$(pwd -P)
 
 if ! test -f git/.gitconfig.local.symlink; then
