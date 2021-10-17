@@ -8,6 +8,11 @@
             "initializationOptions": {
                 "usePlaceholders": true
             }
+        },
+        "efm": {
+            "command": "efm-langserver",
+            "args": [],
+            "filetypes": ["vim", "dockerfile", "sh"]
         }
     }
 }
