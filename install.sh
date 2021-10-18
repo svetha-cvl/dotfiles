@@ -24,6 +24,8 @@ ln "$DOTFILES_ROOT/psql/.psqlrc.symlink" ~/.psqlrc
 ln "$DOTFILES_ROOT/vim/.vimrc.symlink" ~/.vimrc
 ln "$DOTFILES_ROOT/vim/coc-settings.json" ~/.config/nvim/coc-settings.json
 ln "$DOTFILES_ROOT/vim/init.vim" ~/.config/nvim/init.vim
+ln "$DOTFILES_ROOT/vim/plug.vim" ~/.config/nvim/plug.vim
+ln "$DOTFILES_ROOT/vim/efm-ls-config.yaml" ~/.config/efm-langserver/config.yaml
 
 ln "$DOTFILES_ROOT/zsh/.p10k.zsh" ~/.p10k.zsh
 ln "$DOTFILES_ROOT/zsh/.zshrc.local.symlink" ~/.zshrc
