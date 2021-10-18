@@ -182,3 +182,8 @@ lua << EOF
       on_attach = on_attach,
     }
 EOF
+
+augroup rainbow_lisp
+  autocmd!
+  autocmd FileType lisp,clojure,scheme,go RainbowParentheses
+augroup END

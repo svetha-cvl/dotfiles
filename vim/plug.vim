@@ -7,6 +7,8 @@ call plug#begin()
 
 Plug 'overcache/NeoSolarized'
 
+Plug 'junegunn/rainbow_parentheses.vim'
+
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
