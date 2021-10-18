@@ -47,3 +47,5 @@
 
     l = log --oneline
 
+[pull]
+	rebase = true
