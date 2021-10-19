@@ -73,14 +73,18 @@ set hidden
 set ignorecase
 set smartcase
 
-"Turn on incremental search, ie search as the search text is being typed.
-set incsearch
-
 "Reselect pasted text
 nnoremap gp `[v`]
 
+"Turn on incremental search, ie search as the search text is being typed.
+set incsearch
 "Highlight search results. :set nohlsearch if this is overwhelming visually.
 set hlsearch
+
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank{timeout=1000}
+augroup END
 
 "Indent"
 set autoindent
