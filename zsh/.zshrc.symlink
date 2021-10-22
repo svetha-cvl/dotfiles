@@ -78,7 +78,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+plugins=(git vi-mode zsh-syntax-highlighting zsh-autosuggestions)
 
 # Controls whether the prompt is redrawn when switching to a different input mode
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
