@@ -121,7 +121,7 @@ alias gorm="go run main.go"
 alias gopath="cd $(go env GOPATH)"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="/usr/local/opt/openssl/bin:$PATH:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.rvm/bin"
 
 # Autoload functions
 # Replace DOTFILES_ROOT with your path
@@ -138,6 +138,8 @@ source DOTFILES_ROOT/zsh/_timew
 
 # fuzzy file search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # hstr - better command history search
 # https://github.com/dvorka/hstr/tree/6507ac7f9518b896809d7eee3edcaaad94769d18
