@@ -41,6 +41,8 @@ set ruler
 set scrolloff=3
 
 syntax on
+let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'go', 'clojure', 'rust', 'bash']
+
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
