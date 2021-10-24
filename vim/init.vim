@@ -166,6 +166,44 @@ lua << EOF
     }
   end
 
+  nvim_lsp['clojure_lsp'].setup {
+      cmd = { "clojure-lsp" },
+      filetypes = { "clojure", "edn" },
+      --root_dir = root_pattern("project.clj", "deps.edn", ".git"),
+      on_attach = on_attach,
+    }
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#texlab
+  nvim_lsp['texlab'].setup {
+      cmd = { "texlab" },
+      filetypes = { "tex", "bib" },
+      on_attach = on_attach,
+      settings = {
+          texlab = {
+            auxDirectory = ".",
+            bibtexFormatter = "texlab",
+            build = {
+              args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+              executable = "latexmk",
+              forwardSearchAfter = false,
+              onSave = false
+            },
+            chktex = {
+              onEdit = false,
+              onOpenAndSave = false
+            },
+            diagnosticsDelay = 300,
+            formatterLineLength = 80,
+            forwardSearch = {
+              args = {}
+            },
+            latexFormatter = "latexindent",
+            latexindent = {
+              modifyLineBreaks = false
+            }
+          }
+        }
+    }
+
   -- efm language server requires configuration at ~/.config/efm-langserver/config.yaml
   -- Refer https://github.com/mattn/efm-langserver#configuration
   nvim_lsp['efm'].setup {
