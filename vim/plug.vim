@@ -11,6 +11,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 
 Plug 'vim-airline/vim-airline'
