@@ -21,10 +21,10 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <c-p> :FZF<CR>
 
 "Remap window and split navigation, just a little easier
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
-nnoremap <c-h> <c-w>h
+nnoremap <leader>j <c-w>j
+nnoremap <leader>k <c-w>k
+nnoremap <leader>l <c-w>l
+nnoremap <leader>h <c-w>h
 "Handy shortcut to make a vertical split and switch to it
 nnoremap <leader>v <c-w>v<c-w>l
 
