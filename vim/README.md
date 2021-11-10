@@ -23,3 +23,4 @@ Solarized dark
     - brew install jq
     - brew install clojure-lsp/brew/clojure-lsp-native
     - cargo install --git https://github.com/latex-lsp/texlab.git --locked
+    - npm i -g pyright
