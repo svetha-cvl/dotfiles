@@ -29,5 +29,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
+
 " Initialize plugin system
 call plug#end()
