@@ -23,3 +23,8 @@ https://github.com/projekt0n/github-nvim-theme
     - brew install clojure-lsp/brew/clojure-lsp-native
     - cargo install --git https://github.com/latex-lsp/texlab.git --locked
     - npm i -g pyright
+
+### Writing Mode
+- Tools:
+    - [Moby thesaurus](https://github.com/words/moby): npm i -g moby
+- Vim goodness for writing mode taken from [here](https://www.reddit.com/r/vim/comments/q03mqa/my_setup_for_prose/)

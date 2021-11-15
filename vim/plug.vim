@@ -32,5 +32,8 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
 
+Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'text' ] }
+Plug 'reedes/vim-pencil', { 'for': [ 'markdown', 'text' ] }
+
 " Initialize plugin system
 call plug#end()

@@ -106,6 +106,45 @@ map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 
+"Prose mode. Reference: https://www.reddit.com/r/vim/comments/q03mqa/my_setup_for_prose/
+let w:ProseModeOn = 0
+
+function EnableProseMode()
+	setlocal spell spelllang=en_us
+	Goyo
+	SoftPencil
+	echo "Prose Mode On"
+endfu
+
+function DisableProseMode()
+	Goyo!
+	NoPencil
+	setlocal nospell
+	echo "Prose Mode Off"
+endfu
+
+function ToggleProseMode()
+	if w:ProseModeOn == 0
+		call EnableProseMode()
+		let w:ProseModeOn = 1
+	else
+		call DisableProseMode()
+	endif
+endfu
+
+command Prose call EnableProseMode()
+command UnProse call DisableProseMode()
+command ToggleProse call ToggleProseMode()
+
+function ScratchBufferize()
+	setlocal buftype=nofile
+	setlocal bufhidden=hide
+	setlocal noswapfile
+endfu
+
+"Requires moby thesaurus https://github.com/words/moby
+nnoremap <Leader>t :new \| read ! moby <C-R><C-W> \| tr , '\n' <CR>:call ScratchBufferize() <CR>:normal gg2dd <CR>
+
 let g:coq_settings = { 'auto_start': 'shut-up' }
 
 " -------------------- LSP ---------------------------------
