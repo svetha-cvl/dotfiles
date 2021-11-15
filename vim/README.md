@@ -1,13 +1,12 @@
-vim/   
-├── _[coc-settings.json](./coc-settings.json) [DEPRECATED for neovim lsp]_   
-├── [init.vim](./init.vim) - neovim configuration   
-└── [plug.vim](./plug.vim) - neovim plugin configuration using [vim-plug](https://github.com/junegunn/vim-plug)   
+vim/
+├── _[coc-settings.json](./coc-settings.json) [DEPRECATED for neovim lsp]_
+├── [init.vim](./init.vim) - neovim configuration
+└── [plug.vim](./plug.vim) - neovim plugin configuration using [vim-plug](https://github.com/junegunn/vim-plug)
 
 ### Theme
-Solarized dark
-- https://github.com/overcache/NeoSolarized
-- https://github.com/vim-airline/vim-airline/wiki/Screenshots#solarized-dark
-:AirlineTheme solarized
+:AirlineTheme dark
+Github theme
+https://github.com/projekt0n/github-nvim-theme
 
 ### Language Servers
 - LSP configuration - https://github.com/neovim/nvim-lspconfig

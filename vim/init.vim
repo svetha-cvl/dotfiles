@@ -7,12 +7,11 @@ set noswapfile
 let mapleader = ","
 
 set termguicolors
-colorscheme NeoSolarized
-set background=dark
-let g:neosolarized_contrast = "normal"
-"Visibility of special characters - trailing spaces, tabs, etc.
-let g:neosolarized_visibility = "normal"
-let g:airline_solarized_bg='dark'
+colorscheme github_dark
+let g:github_comment_style = "italic"
+let g:github_keyword_style = "NONE"
+let g:github_function_style = "NONE"
+let g:github_variable_style = "NONE"
 
 "Remap most used NERDTree commands
 nnoremap <Leader>n :NERDTreeToggle<CR>

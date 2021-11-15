@@ -5,7 +5,7 @@
 let g:plug_home = stdpath('data') . '/plugged'
 call plug#begin()
 
-Plug 'overcache/NeoSolarized'
+Plug 'projekt0n/github-nvim-theme'
 
 Plug 'junegunn/rainbow_parentheses.vim'
 
