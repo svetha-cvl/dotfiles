@@ -1,6 +1,6 @@
-vim/
-├── _[coc-settings.json](./coc-settings.json) [DEPRECATED for neovim lsp]_
-├── [init.vim](./init.vim) - neovim configuration
+vim/  
+├── _[coc-settings.json](./coc-settings.json) [DEPRECATED for neovim lsp]_   
+├── [init.vim](./init.vim) - neovim configuration   
 └── [plug.vim](./plug.vim) - neovim plugin configuration using [vim-plug](https://github.com/junegunn/vim-plug)
 
 ### Theme
