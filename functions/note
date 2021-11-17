@@ -1,5 +1,5 @@
 function note() {
-	touch `date +%Y%m%d`-$1.md && vim `date +%Y%m%d`-$1.md
+	touch `date +%Y%m%d`-$1.md && nvim `date +%Y%m%d`-$1.md
 }
 
 
