@@ -26,6 +26,10 @@ nnoremap <leader>l <c-w>l
 nnoremap <leader>h <c-w>h
 "Handy shortcut to make a vertical split and switch to it
 nnoremap <leader>v <c-w>v<c-w>l
+"Remap tab navigation
+nnoremap tn :tabnext<CR>
+nnoremap tp :tabprev<CR>
+nnoremap te :tabedit
 
 "https://github.com/camspiers/lens.vim#disabled-filetypes
 let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
