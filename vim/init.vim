@@ -101,6 +101,9 @@ set autoindent
 set foldmethod=indent
 set foldlevel=2
 
+"Disable automatic window resizing for nerdtree and fzf
+let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
+
 "Turn off audio bell for errors. This can get annoying. Use a visual bell instead.
 "Turn off flash for the visual bell
 set noerrorbells visualbell t_vb=
