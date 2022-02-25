@@ -53,6 +53,8 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+"Round indent spacing to the next multiple of shiftwidth on any indent actions
+set shiftround
 
 "Setting both number and relative number shows the actual line number for the current line (where cursor is located) and the relative number for the other lines.
 set number
