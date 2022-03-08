@@ -3,6 +3,8 @@ set nocompatible "be iMproved, required
 
 set noswapfile
 
+set mouse=a
+
 "Remap leader
 let mapleader = ","
 
