@@ -279,6 +279,7 @@ lua << EOF
     }
 EOF
 
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 augroup rainbow_lisp
   autocmd!
   autocmd FileType lisp,clojure,scheme,go RainbowParentheses
