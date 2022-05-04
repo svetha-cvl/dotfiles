@@ -17,6 +17,7 @@ let g:github_variable_style = "NONE"
 
 "Remap most used NERDTree commands
 nnoremap <Leader>n :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 "Map ctrl+p to fuzzy find files
 nnoremap <c-p> :FZF<CR>
