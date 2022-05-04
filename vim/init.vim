@@ -277,10 +277,17 @@ lua << EOF
       },
       on_attach = on_attach,
     }
+
+    nvim_lsp['terraformls'].setup {
+        filetypes = { "terraform", "tf" },
+        cmd = { "terraform-ls", "serve" },
+        root_pattern = {".terraform", ".git"},
+        }
 EOF
+autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
 
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 augroup rainbow_lisp
   autocmd!
-  autocmd FileType lisp,clojure,scheme,go RainbowParentheses
+  autocmd FileType lisp,clojure,scheme,go,tf RainbowParentheses
 augroup END

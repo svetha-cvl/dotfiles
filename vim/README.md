@@ -23,6 +23,7 @@ https://github.com/projekt0n/github-nvim-theme
     - brew install clojure-lsp/brew/clojure-lsp-native
     - cargo install --git https://github.com/latex-lsp/texlab.git --locked
     - npm i -g pyright
+    - brew install hashicorp/tap/terraform-ls
 
 ### Writing Mode
 - Tools:
