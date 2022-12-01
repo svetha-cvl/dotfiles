@@ -283,6 +283,14 @@ lua << EOF
         filetypes = { "terraform", "tf" },
         cmd = { "terraform-ls", "serve" },
         root_pattern = {".terraform", ".git"},
+        on_attach = on_attach,
+        }
+
+    nvim_lsp['sqlls'].setup {
+        -- filetypes = { "terraform", "tf" },
+        cmd = { "sql-language-server", "up", "--method", "stdio" },
+        -- cmd = { "terraform-ls", "serve" },
+        on_attach = on_attach,
         }
 EOF
 autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()

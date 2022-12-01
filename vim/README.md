@@ -24,6 +24,7 @@ https://github.com/projekt0n/github-nvim-theme
     - cargo install --git https://github.com/latex-lsp/texlab.git --locked
     - npm i -g pyright
     - brew install hashicorp/tap/terraform-ls
+    - npm i -g sql-language-server
 
 ### Writing Mode
 - Tools:
