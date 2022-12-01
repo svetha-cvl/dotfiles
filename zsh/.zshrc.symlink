@@ -134,6 +134,7 @@ done
 # Bash autocompletion
 fpath=(DOTFILES_ROOT/zsh $fpath)
 source <(kubectl completion zsh)
+source <(k9s completion zsh)
 source DOTFILES_ROOT/zsh/_timew
 
 # fuzzy file search
