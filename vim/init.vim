@@ -93,6 +93,8 @@ nnoremap gp `[v`]
 set incsearch
 "Highlight search results. :set nohlsearch if this is overwhelming visually.
 set hlsearch
+"Make the substitute command change the document live.
+set inccommand=split
 
 augroup highlight_yank
     autocmd!
