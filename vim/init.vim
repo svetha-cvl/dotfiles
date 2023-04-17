@@ -34,6 +34,11 @@ nnoremap tn :tabnext<CR>
 nnoremap tp :tabprev<CR>
 nnoremap te :tabedit
 
+"Tab between buffers
+noremap <tab> <c-w><c-w>
+"Display open buffers
+nnoremap <leader>b :buffers<CR>:buffer<Space>
+
 "https://github.com/camspiers/lens.vim#disabled-filetypes
 let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
 
