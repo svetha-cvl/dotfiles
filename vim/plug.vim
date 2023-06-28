@@ -6,8 +6,10 @@ let g:plug_home = stdpath('data') . '/plugged'
 call plug#begin()
 
 Plug 'projekt0n/github-nvim-theme'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
-Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'HiPhish/nvim-ts-rainbow2'
+" Plug 'junegunn/rainbow_parentheses.vim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -34,6 +36,8 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 
 Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'text' ] }
 Plug 'reedes/vim-pencil', { 'for': [ 'markdown', 'text' ] }
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Initialize plugin system
 call plug#end()

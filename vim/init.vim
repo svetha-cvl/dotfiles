@@ -9,11 +9,75 @@ set mouse=a
 let mapleader = ","
 
 set termguicolors
-colorscheme github_dark
-let g:github_comment_style = "italic"
-let g:github_keyword_style = "NONE"
-let g:github_function_style = "NONE"
-let g:github_variable_style = "NONE"
+" colorscheme github_dark
+" let g:github_comment_style = "italic"
+" let g:github_keyword_style = "NONE"
+" let g:github_function_style = "NONE"
+" let g:github_variable_style = "NONE"
+
+lua << EOF
+require("catppuccin").setup({
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
+    transparent_background = false, -- disables setting the background color.
+    show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
+    dim_inactive = {
+        enabled = true, -- dims the background color of inactive window
+        shade = "dark",
+        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+    },
+    styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+    },
+    color_overrides = {},
+    custom_highlights = {},
+    integrations = { -- https://github.com/catppuccin/nvim#integrations
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        telescope = true,
+        notify = false,
+        mini = false,
+        native_lsp = {
+            enabled = true,
+            virtual_text = {
+                errors = { "italic" },
+                hints = { "italic" },
+                warnings = { "italic" },
+                information = { "italic" },
+            },
+            underlines = {
+                errors = { "underline" },
+                hints = { "underline" },
+                warnings = { "underline" },
+                information = { "underline" },
+            },
+            inlay_hints = {
+                background = true,
+            },
+        },
+        treesitter = true,
+        ts_rainbow2 = true,
+        gitgutter = true,
+    },
+})
+
+-- setup must be called before loading
+vim.cmd.colorscheme "catppuccin"
+EOF
+
+colorscheme catppuccin
+let g:airline_theme = 'catppuccin'
 
 "Remap most used NERDTree commands
 nnoremap <Leader>n :NERDTreeToggle<CR>
@@ -288,16 +352,71 @@ lua << EOF
         }
 
     nvim_lsp['sqlls'].setup {
-        -- filetypes = { "terraform", "tf" },
         cmd = { "sql-language-server", "up", "--method", "stdio" },
-        -- cmd = { "terraform-ls", "serve" },
-        on_attach = on_attach,
+  --      on_attach = on_attach,
         }
 EOF
-autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
 
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-augroup rainbow_lisp
-  autocmd!
-  autocmd FileType lisp,clojure,scheme,go,tf RainbowParentheses
-augroup END
+lua << EOF
+    require'nvim-treesitter.configs'.setup {
+    -- treesitter requires the following parsers to always be installed
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+
+    -- Install parsers synchronously (only applied to `ensure_installed`)
+    sync_install = false,
+
+    -- Automatically install missing parsers when entering buffer
+    -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+    auto_install = false,
+
+    ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+    -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+    highlight = {
+        enable = true,
+
+        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+        -- the name of the parser)
+        -- list of language that will be disabled
+        -- disable = { "c", "rust" },
+        -- -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+        -- disable = function(lang, buf)
+        --     local max_filesize = 100 * 1024 -- 100 KB
+        --     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        --     if ok and stats and stats.size > max_filesize then
+        --         return true
+        --     end
+        -- end,
+
+        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+        -- Using this option may slow down your editor, and you may see some duplicate highlights.
+        -- Instead of true it can also be a list of languages
+        additional_vim_regex_highlighting = false,
+    },
+
+    indent = {
+        enable = true
+    },
+
+    -- https://github.com/HiPhish/nvim-ts-rainbow2
+    rainbow = {
+        enable = true,
+        query = {
+            'rainbow-parens',
+            html = 'rainbow-tags',
+            latex = 'rainbow-blocks',
+        },
+        -- Highlight the entire buffer all at once
+        strategy = require('ts-rainbow').strategy.global,
+    }
+}
+EOF
+
+" Trying out ts-rainbow instead
+" let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+" augroup rainbow_lisp
+"   autocmd!
+"   autocmd FileType lisp,clojure,scheme,go,tf RainbowParentheses
+" augroup END

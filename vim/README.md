@@ -26,6 +26,26 @@ https://github.com/projekt0n/github-nvim-theme
     - brew install hashicorp/tap/terraform-ls
     - npm i -g sql-language-server
 
+### Treesitter Parsers
+- Install these manually using `:TSInstall <parser>`
+    - bash
+    - c
+    - dockerfile
+    - go
+    - json
+    - latex
+    - lua
+    - make
+    - markdown_inline
+    - proto
+    - python
+    - query
+    - terraform
+    - vim
+    - vimdoc
+    - yaml
+- Reference: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+
 ### Writing Mode
 - Tools:
     - [Moby thesaurus](https://github.com/words/moby): npm i -g moby
