@@ -7,6 +7,7 @@ vim/
 :AirlineTheme dark
 Github theme
 https://github.com/projekt0n/github-nvim-theme
+https://github.com/catppuccin/catppuccin
 
 ### Language Servers
 - LSP configuration - https://github.com/neovim/nvim-lspconfig
@@ -45,6 +46,9 @@ https://github.com/projekt0n/github-nvim-theme
     - vimdoc
     - yaml
 - Reference: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+
+### Telescope dependencies
+- brew install ripgrep
 
 ### Writing Mode
 - Tools:
