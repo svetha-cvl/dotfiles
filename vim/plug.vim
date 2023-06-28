@@ -29,8 +29,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 
-Plug 'camspiers/animate.vim'
-Plug 'camspiers/lens.vim'
+" Plug 'camspiers/animate.vim'
+" Plug 'camspiers/lens.vim'
 
 Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'text' ] }
 Plug 'reedes/vim-pencil', { 'for': [ 'markdown', 'text' ] }
