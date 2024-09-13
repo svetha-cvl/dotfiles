@@ -462,6 +462,14 @@ require('telescope').setup{
 require('telescope').load_extension('fzf')
 EOF
 
+lua << EOF
+require('which-key').setup {
+  keys = {
+      ["<leader>?"] = "WhichKey",
+      }
+}
+EOF
+
 nnoremap <silent> ;f <cmd>Telescope find_files<cr>
 nnoremap <silent> ;r <cmd>Telescope live_grep<cr>
 nnoremap <silent> ; <cmd>Telescope<cr>

@@ -46,5 +46,7 @@ Plug 'reedes/vim-pencil', { 'for': [ 'markdown', 'text' ] }
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+Plug 'folke/which-key.nvim'
+
 " Initialize plugin system
 call plug#end()
