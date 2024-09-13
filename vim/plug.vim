@@ -8,8 +8,9 @@ call plug#begin()
 Plug 'projekt0n/github-nvim-theme'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
-Plug 'HiPhish/nvim-ts-rainbow2'
+" Plug 'HiPhish/nvim-ts-rainbow2' " this plugin is not working
 " Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'

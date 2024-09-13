@@ -262,19 +262,20 @@ lua << EOF
     buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
     buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 
+    -- Broken with neovim 0.10
     -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
-        require('lspconfig').util.nvim_multiline_command [[
-        :hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-        :hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-        :hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-        augroup lsp_document_highlight
-            autocmd!
-            autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
-        ]]
-    end
+    -- if client.resolved_capabilities.document_highlight then
+    --     require('lspconfig').util.nvim_multiline_command [[
+    --     :hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+    --     :hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+    --     :hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+    --     augroup lsp_document_highlight
+    --         autocmd!
+    --         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+    --         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    --     augroup END
+    --     ]]
+    -- end
   end
 
   local servers = {'gopls', 'yamlls', 'bashls', 'pyright'}
@@ -400,17 +401,19 @@ lua << EOF
         enable = true
     },
 
+    -- Broken with nvim 0.10 / latest treesitter
+    -- Using rainbow-delimiters with default config instead
     -- https://github.com/HiPhish/nvim-ts-rainbow2
-    rainbow = {
-        enable = true,
-        query = {
-            'rainbow-parens',
-            html = 'rainbow-tags',
-            latex = 'rainbow-blocks',
-        },
-        -- Highlight the entire buffer all at once
-        strategy = require('ts-rainbow').strategy.global,
-    }
+    -- rainbow = {
+    --     enable = true,
+    --     query = {
+    --         'rainbow-parens',
+    --         html = 'rainbow-tags',
+    --         latex = 'rainbow-blocks',
+    --     },
+    --     -- Highlight the entire buffer all at once
+    --     strategy = require('ts-rainbow').strategy.global,
+    -- }
 }
 EOF
 
