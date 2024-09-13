@@ -46,6 +46,9 @@ Plug 'reedes/vim-pencil', { 'for': [ 'markdown', 'text' ] }
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+Plug 'github/copilot.vim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+
 Plug 'folke/which-key.nvim'
 
 " Initialize plugin system

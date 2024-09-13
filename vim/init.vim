@@ -16,6 +16,26 @@ set termguicolors
 " let g:github_variable_style = "NONE"
 
 lua << EOF
+    vim.g.copilot_no_tab_map = true
+    vim.keymap.set('i','<C-j>', 'copilot#Accept("\\<CR>")', {expr = true, replace_keycodes = false})
+    vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-word)')
+EOF
+
+lua << EOF
+-- Copilot Chat configurations
+require("CopilotChat").setup {
+  debug = true, -- Enable debugging
+    window = {
+        layout = 'float',
+        relative = 'cursor',
+        row = 1,
+        },
+  options = {
+  },
+}
+EOF
+
+lua << EOF
 require("catppuccin").setup({
     flavour = "mocha", -- latte, frappe, macchiato, mocha
     transparent_background = false, -- disables setting the background color.
