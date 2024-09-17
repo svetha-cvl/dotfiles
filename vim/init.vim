@@ -35,6 +35,10 @@ require("CopilotChat").setup {
 }
 EOF
 
+nnoremap <leader>cc :CopilotChatOpen<CR>
+nnoremap <leader>cs :CopilotChatSend<CR>
+nnoremap <leader>cq :CopilotChatClose<CR>
+
 lua << EOF
 require("catppuccin").setup({
     flavour = "mocha", -- latte, frappe, macchiato, mocha
