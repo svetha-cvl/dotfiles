@@ -139,6 +139,7 @@ set autowrite
 
 "Show cursor position"
 set ruler
+set cursorline
 "Set scroll offset to avoid hitting the last line before scrolling"
 set scrolloff=3
 
