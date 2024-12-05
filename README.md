@@ -12,6 +12,8 @@ Run `install.sh` and get going.
     - `hstr --show-configuration >> ~/.zshrc`
 - `kubectl` for kubectl autocompletion.
 - `timewarrior` ([Reference](https://timewarrior.net/))
+- `neovim` (`brew install neovim`)
+- `npm` (`brew install npm`)
 
 #### References
 Hugely inspired by [Zach Holman's dotfiles](https://github.com/holman/dotfiles)

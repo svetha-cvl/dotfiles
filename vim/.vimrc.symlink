@@ -2,31 +2,32 @@ set nocompatible "be iMproved, required
 filetype off "required for Vundle
 
 "Set runtime path to include Vundle and initialise"
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-"Add all plugins in this block
+" use neovim plug instead
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
+""Add all plugins in this block
 
-    "https://github.com/preservim/nerdtree
-    Plugin 'preservim/nerdtree'
+"    "https://github.com/preservim/nerdtree
+"    Plugin 'preservim/nerdtree'
 
-    "https://github.com/tpope/vim-fugitive
-    Plugin 'https://tpope.io/vim/fugitive.git'
+"    "https://github.com/tpope/vim-fugitive
+"    Plugin 'https://tpope.io/vim/fugitive.git'
 
-    "https://github.com/junegunn/fzf/blob/master/README-VIM.md
-    Plugin 'junegunn/fzf'
+"    "https://github.com/junegunn/fzf/blob/master/README-VIM.md
+"    Plugin 'junegunn/fzf'
 
-    "https://github.com/tpope/vim-commentary
-    Plugin 'https://tpope.io/vim/commentary.git'
+"    "https://github.com/tpope/vim-commentary
+"    Plugin 'https://tpope.io/vim/commentary.git'
 
-    " https://github.com/neoclide/coc.nvim
-    Plugin 'neoclide/coc.nvim'
+"    " https://github.com/neoclide/coc.nvim
+"    Plugin 'neoclide/coc.nvim'
 
-    "https://github.com/fatih/vim-go
-    Plugin 'fatih/vim-go'
+"    "https://github.com/fatih/vim-go
+"    Plugin 'fatih/vim-go'
 
-    "https://github.com/tpope/vim-fireplace
-    Plugin 'https://tpope.io/vim/fireplace.git'
-call vundle#end() "required
+"    "https://github.com/tpope/vim-fireplace
+"    Plugin 'https://tpope.io/vim/fireplace.git'
+"call vundle#end() "required
 filetype plugin indent on "required
 
 set noswapfile
