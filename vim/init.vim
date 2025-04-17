@@ -208,8 +208,8 @@ let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
 set noerrorbells visualbell t_vb=
 
 "Remap vim-go commands
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>gob  <Plug>(go-build)
+autocmd FileType go nmap <leader>gor  <Plug>(go-run)
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
@@ -449,6 +449,37 @@ EOF
 "   autocmd FileType lisp,clojure,scheme,go,tf RainbowParentheses
 " augroup END
 "
+
+lua << EOF
+require('dap-go').setup()
+
+local dap = require('dap')
+
+vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', {text='➡️', texthl='', linehl='', numhl=''})
+
+vim.api.nvim_set_keymap('n', '<F5>', ':lua require("dap").continue()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F10>', ':lua require("dap").step_over()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F11>', ':lua require("dap").step_into()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F12>', ':lua require("dap").step_out()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>b', ':lua require("dap").toggle_breakpoint()<CR>', { noremap = true, silent = true })
+
+local dapui = require("dapui")
+dapui.setup()
+-- Automatically open/close the UI when debugging starts/ends
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
+
+-- More keybindings under telescope keybindings below
+EOF
+
 lua << EOF
 require('telescope').setup{
   defaults = {
@@ -485,6 +516,7 @@ require('telescope').setup{
 
 -- Has to be called after setup
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('dap')
 EOF
 
 lua << EOF
@@ -498,3 +530,6 @@ EOF
 nnoremap <silent> ;f <cmd>Telescope find_files<cr>
 nnoremap <silent> ;r <cmd>Telescope live_grep<cr>
 nnoremap <silent> ; <cmd>Telescope<cr>
+nnoremap <silent> ;d <cmd>Telescope dap commands<cr>
+nnoremap <silent> ;dv <cmd>Telescope dap variables<cr>
+nnoremap <silent> ;df <cmd>Telescope dap frames<cr>

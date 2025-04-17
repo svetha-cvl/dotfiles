@@ -39,6 +39,13 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 
+Plug 'mfussenegger/nvim-dap'
+" dependency for nvim-dap-ui
+Plug 'nvim-neotest/nvim-nio'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'leoluz/nvim-dap-go'
+Plug 'nvim-telescope/telescope-dap.nvim'
+
 " Plug 'camspiers/animate.vim'
 " Plug 'camspiers/lens.vim'
 
@@ -48,7 +55,7 @@ Plug 'reedes/vim-pencil', { 'for': [ 'markdown', 'text' ] }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'github/copilot.vim'
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
 
 Plug 'folke/which-key.nvim'
 
