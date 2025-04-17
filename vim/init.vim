@@ -100,7 +100,6 @@ require("catppuccin").setup({
 vim.cmd.colorscheme "catppuccin"
 EOF
 
-colorscheme catppuccin
 let g:airline_theme = 'catppuccin'
 
 "Remap most used NERDTree commands
@@ -126,9 +125,6 @@ nnoremap te :tabedit
 noremap <tab> <c-w><c-w>
 "Display open buffers
 nnoremap <leader>b :buffers<CR>:buffer<Space>
-
-"https://github.com/camspiers/lens.vim#disabled-filetypes
-let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
 
 "Set filename as window title
 set title
@@ -195,7 +191,7 @@ augroup highlight_yank
     au TextYankPost * silent! lua vim.highlight.on_yank{timeout=1000}
 augroup END
 
-"Indent"
+"Indent
 set autoindent
 set foldmethod=indent
 set foldlevel=2
