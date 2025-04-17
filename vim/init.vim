@@ -196,7 +196,12 @@ set autoindent
 set foldmethod=indent
 set foldlevel=2
 
+"Persistent undo to avoid losing undo history
+set undofile
+set undodir=~/.config/nvim/undo
+
 "Disable automatic window resizing for nerdtree and fzf
+"https://github.com/camspiers/lens.vim#disabled-filetypes
 let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
 
 "Turn off audio bell for errors. This can get annoying. Use a visual bell instead.
