@@ -13,6 +13,7 @@ Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim'
 
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
