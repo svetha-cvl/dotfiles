@@ -5,7 +5,7 @@
 let g:plug_home = stdpath('data') . '/plugged'
 call plug#begin()
 
-Plug 'projekt0n/github-nvim-theme'
+" Plug 'projekt0n/github-nvim-theme'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 " Plug 'HiPhish/nvim-ts-rainbow2' " this plugin is not working
