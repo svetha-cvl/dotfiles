@@ -43,6 +43,7 @@ https://github.com/catppuccin/catppuccin
     - latex
     - lua
     - make
+    - markdown
     - markdown_inline
     - proto
     - python
