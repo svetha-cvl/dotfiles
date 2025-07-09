@@ -137,6 +137,8 @@ source <(kubectl completion zsh)
 source <(k9s completion zsh)
 source DOTFILES_ROOT/zsh/_timew
 
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
 # fuzzy file search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # autojump
