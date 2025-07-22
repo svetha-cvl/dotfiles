@@ -30,6 +30,7 @@ if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
 fi
 
 ln "$DOTFILES_ROOT/git/.gitconfig.local.symlink" ~/.gitconfig
+ln "$DOTFILES_ROOT/git/.gitconfig-work.local.symlink" ~/.gitconfig-work
 
 ln "$DOTFILES_ROOT/psql/.psqlrc.symlink" ~/.psqlrc
 
