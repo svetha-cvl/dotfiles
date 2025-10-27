@@ -444,6 +444,9 @@ lua << EOF
 }
 EOF
 
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 " Trying out ts-rainbow instead
 " let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 " augroup rainbow_lisp
