@@ -304,7 +304,8 @@ lua << EOF
     -- end
   end
 
-  local servers = {'gopls', 'yamlls', 'bashls', 'pyright'}
+  -- https://buf.build/docs/reference/cli/buf/lsp/
+  local servers = {'gopls', 'yamlls', 'bashls', 'pyright', 'buf_ls'}
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
