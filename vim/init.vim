@@ -16,28 +16,68 @@ set termguicolors
 " let g:github_variable_style = "NONE"
 
 lua << EOF
-    vim.g.copilot_no_tab_map = true
-    vim.keymap.set('i','<C-j>', 'copilot#Accept("\\<CR>")', {expr = true, replace_keycodes = false})
-    vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-word)')
-EOF
-
-lua << EOF
--- Copilot Chat configurations
-require("CopilotChat").setup {
+  -- Copilot Chat configurations
+  require("CopilotChat").setup {
   debug = true, -- Enable debugging
     window = {
-        layout = 'float',
-        relative = 'cursor',
-        row = 1,
-        },
+      layout = 'float',
+      relative = 'cursor',
+      row = 1,
+    },
   options = {
   },
-}
+  }
+
+  vim.g.copilot_no_tab_map = true
+  vim.keymap.set('i','<C-j>', 'copilot#Accept("\\<CR>")', {expr = true, replace_keycodes = false})
+  vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-word)')
+  vim.keymap.set({"n", "v"}, "<leader>cc", "<cmd>CopilotChatOpen<CR>", { noremap = true, silent = true })
+  vim.keymap.set({"n", "v"}, "<leader>cs", "<cmd>CopilotChatSend<CR>", { noremap = true, silent = true })
+  vim.keymap.set({"n", "v"}, "<leader>cq", "<cmd>CopilotChatClose<CR>", { noremap = true, silent = true })
 EOF
 
-nnoremap <leader>cc :CopilotChatOpen<CR>
-nnoremap <leader>cs :CopilotChatSend<CR>
-nnoremap <leader>cq :CopilotChatClose<CR>
+" nnoremap <leader>cc :CopilotChatOpen<CR>
+" nnoremap <leader>cs :CopilotChatSend<CR>
+" nnoremap <leader>cq :CopilotChatClose<CR>
+
+lua << EOF
+  require("codecompanion").setup({
+  -- Reference: https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
+  opts = {
+    -- log_level = "DEBUG", -- Turn on for debugging
+  },
+  strategies = {
+    chat = {
+      adapter = "copilot",
+    },
+    inline = {
+      adapter = "copilot",
+    },
+    cmd = {
+      adapter = "copilot",
+    }
+  },
+  display = {
+    action_palette = {
+      provider = "telescope",
+      position = "top", -- "top" or "bottom"
+    },
+    chat = {
+      window = {
+        layout = 'vertical',
+        postition = 'left',
+        width = 0.3,
+      },
+    },
+  },
+})
+  vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+  vim.keymap.set({ "n", "v" }, "<leader>ct", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+  -- vim.keymap.set("v", "ga", "<cmd>CodeComqanionChat Add<cr>", { noremap = true, silent = true })
+
+  -- Expand 'cc' into 'CodeCompanion' in the command line
+  vim.cmd([[cab cc CodeCompanion]])
+EOF
 
 lua << EOF
 require("catppuccin").setup({
@@ -388,7 +428,7 @@ EOF
 lua << EOF
     require'nvim-treesitter.configs'.setup {
     -- treesitter requires the following parsers to always be installed
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
