@@ -76,7 +76,7 @@ lua << EOF
   -- vim.keymap.set("v", "ga", "<cmd>CodeComqanionChat Add<cr>", { noremap = true, silent = true })
 
   -- Expand 'cc' into 'CodeCompanion' in the command line
-  vim.cmd([[cab cc CodeCompanion]])
+  -- vim.cmd([[cab cc CodeCompanion]])
 EOF
 
 lua << EOF
