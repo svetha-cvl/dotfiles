@@ -2,7 +2,7 @@
 [user]
 	name = AUTHOR
 	email = PERSONAL_EMAIL
-[includeIf "gitdir:~/dev/work/*"]
+[includeIf "gitdir:~/dev/work/"]
     path = ~/.gitconfig-work
 [filter "lfs"]
 	clean = git-lfs clean -- %f
