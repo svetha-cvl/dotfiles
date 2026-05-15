@@ -46,3 +46,7 @@ ln "$DOTFILES_ROOT/vim/efm-ls-config.yaml" ~/.config/efm-langserver/config.yaml
 
 ln "$DOTFILES_ROOT/zsh/.p10k.zsh" ~/.p10k.zsh
 ln "$DOTFILES_ROOT/zsh/.zshrc.local.symlink" ~/.zshrc
+
+mkdir -p "$HOME/.cursor" "$HOME/.config/opencode"
+ln -snf "$DOTFILES_ROOT/ai/skills" "$HOME/.cursor/skills"
+ln -snf "$DOTFILES_ROOT/ai/skills" "$HOME/.config/opencode/skills"
