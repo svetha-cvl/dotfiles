@@ -8,6 +8,35 @@ set mouse=a
 "Remap leader
 let mapleader = ","
 
+" -------------------- Python host -------------------------
+" Pin Neovim's Python provider (and any plugin that respects
+" g:python3_host_prog, e.g. coq_nvim) to a known-good interpreter.
+"
+" Why this is needed
+"   On macOS Tahoe (26.x), the system /usr/lib/libexpat.1.dylib is missing
+"   the `_XML_SetAllocTrackerActivationThreshold` symbol that Homebrew's
+"   Python bottles (3.10/3.12/3.14) were built against. Anything importing
+"   `pyexpat` (including `ensurepip` during `python -m venv`) crashes with
+"   `Symbol not found`. coq_nvim's `:COQdeps` catches the resulting
+"   CalledProcessError and prints the misleading message
+"     "Please install python3-venv separately. (apt, yum, apk, etc)"
+"   even though the real fault is the libexpat ABI mismatch.
+"
+" Fix
+"   Use a hermetic Python from `uv` (which bundles its own libexpat and
+"   isn't affected by the macOS regression). One-time setup:
+"     brew install uv
+"     uv python install 3.12
+"     rm -rf ~/.local/share/nvim/plugged/coq_nvim/.vars
+"   Then start nvim and run `:COQdeps`.
+"
+"   If/when Homebrew ships a fixed bottle for macOS Tahoe you can drop
+"   this and let Neovim auto-discover `python3` from PATH again.
+let s:uv_python = expand('~/.local/share/uv/python/cpython-3.12-macos-aarch64-none/bin/python3.12')
+if filereadable(s:uv_python)
+  let g:python3_host_prog = s:uv_python
+endif
+
 set termguicolors
 " colorscheme github_dark
 " let g:github_comment_style = "italic"
@@ -140,7 +169,9 @@ require("catppuccin").setup({
 vim.cmd.colorscheme "catppuccin"
 EOF
 
-let g:airline_theme = 'catppuccin'
+" Airline theme is provided by the catppuccin/vim plugin; flavour suffix
+" (latte/frappe/macchiato/mocha) must match catppuccin.nvim's flavour above.
+let g:airline_theme = 'catppuccin_mocha'
 
 "Remap most used NERDTree commands
 nnoremap <Leader>n :NERDTreeToggle<CR>
@@ -297,17 +328,16 @@ nnoremap <Leader>t :new \| read ! moby <C-R><C-W> \| tr , '\n' <CR>:call Scratch
 let g:coq_settings = { 'auto_start': 'shut-up' }
 
 " -------------------- LSP ---------------------------------
+" Migrated to the vim.lsp.config / vim.lsp.enable API introduced in Neovim 0.11.
+" See `:help lspconfig-nvim-0.11`. nvim-lspconfig still ships per-server
+" defaults under `lsp/<name>.lua`, which `vim.lsp.enable` picks up automatically.
 lua << EOF
-  local nvim_lsp = require('lspconfig')
   local coq = require('coq')
 
   local on_attach = function(client, bufnr)
-    -- require('completion').on_attach(client, bufnr)
-
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Mappings
     local opts = { noremap=true, silent=true }
@@ -327,102 +357,95 @@ lua << EOF
     buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
     buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
     buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
-
-    -- Broken with neovim 0.10
-    -- Set autocommands conditional on server_capabilities
-    -- if client.resolved_capabilities.document_highlight then
-    --     require('lspconfig').util.nvim_multiline_command [[
-    --     :hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-    --     :hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-    --     :hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-    --     augroup lsp_document_highlight
-    --         autocmd!
-    --         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-    --         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    --     augroup END
-    --     ]]
-    -- end
   end
 
-  -- https://buf.build/docs/reference/cli/buf/lsp/
-  local servers = {'gopls', 'yamlls', 'bashls', 'pyright', 'buf_ls'}
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-    }
-  end
+  -- Apply on_attach to every server via the '*' wildcard config.
+  vim.lsp.config('*', {
+    on_attach = on_attach,
+  })
 
-  nvim_lsp['clojure_lsp'].setup {
-      cmd = { "clojure-lsp" },
-      filetypes = { "clojure", "edn" },
-      --root_dir = root_pattern("project.clj", "deps.edn", ".git"),
-      on_attach = on_attach,
-    }
+  -- Per-server overrides. These are merged with the defaults shipped by
+  -- nvim-lspconfig under lsp/<name>.lua.
+  vim.lsp.config('clojure_lsp', {
+    cmd = { 'clojure-lsp' },
+    filetypes = { 'clojure', 'edn' },
+  })
+
   -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#texlab
-  nvim_lsp['texlab'].setup {
-      cmd = { "texlab" },
-      filetypes = { "tex", "bib" },
-      on_attach = on_attach,
-      settings = {
-          texlab = {
-            auxDirectory = ".",
-            bibtexFormatter = "texlab",
-            build = {
-              args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-              executable = "latexmk",
-              forwardSearchAfter = false,
-              onSave = false
-            },
-            chktex = {
-              onEdit = false,
-              onOpenAndSave = false
-            },
-            diagnosticsDelay = 300,
-            formatterLineLength = 80,
-            forwardSearch = {
-              args = {}
-            },
-            latexFormatter = "latexindent",
-            latexindent = {
-              modifyLineBreaks = false
-            }
-          }
-        }
-    }
+  vim.lsp.config('texlab', {
+    cmd = { 'texlab' },
+    filetypes = { 'tex', 'bib' },
+    settings = {
+      texlab = {
+        auxDirectory = '.',
+        bibtexFormatter = 'texlab',
+        build = {
+          args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
+          executable = 'latexmk',
+          forwardSearchAfter = false,
+          onSave = false,
+        },
+        chktex = {
+          onEdit = false,
+          onOpenAndSave = false,
+        },
+        diagnosticsDelay = 300,
+        formatterLineLength = 80,
+        forwardSearch = {
+          args = {},
+        },
+        latexFormatter = 'latexindent',
+        latexindent = {
+          modifyLineBreaks = false,
+        },
+      },
+    },
+  })
 
   -- efm language server requires configuration at ~/.config/efm-langserver/config.yaml
   -- Refer https://github.com/mattn/efm-langserver#configuration
-  nvim_lsp['efm'].setup {
-      filetypes = { 'dockerfile', 'sh', 'yaml', 'json' },
-      init_options = {documentFormatting=true, hover=true, documentSymbol=true, completion=true},
-      settings = {
-        rootMarkers = {".git/"},
-        languages = {
-            dockerfile = {
-                {lintCommand="hadolint", lintFormats="%f:%l %m"}
-            },
-            sh = {
-                {lintCommand="shellcheck -f gcc -x", lintSource="shellcheck", lintFormats={"%f:%l:%c: %trror: %m", "%f:%l:%c: %tarning: %m", "%f:%l:%c: %tote: %m"}}
-            },
-            json = {
-                {lintCommand="jq .", lintSource="jq"}
-            }
-        }
+  vim.lsp.config('efm', {
+    filetypes = { 'dockerfile', 'sh', 'yaml', 'json' },
+    init_options = { documentFormatting = true, hover = true, documentSymbol = true, completion = true },
+    settings = {
+      rootMarkers = { '.git/' },
+      languages = {
+        dockerfile = {
+          { lintCommand = 'hadolint', lintFormats = '%f:%l %m' },
+        },
+        sh = {
+          { lintCommand = 'shellcheck -f gcc -x', lintSource = 'shellcheck', lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' } },
+        },
+        json = {
+          { lintCommand = 'jq .', lintSource = 'jq' },
+        },
       },
-      on_attach = on_attach,
-    }
+    },
+  })
 
-    nvim_lsp['terraformls'].setup {
-        filetypes = { "terraform", "tf" },
-        cmd = { "terraform-ls", "serve" },
-        root_pattern = {".terraform", ".git"},
-        on_attach = on_attach,
-        }
+  vim.lsp.config('terraformls', {
+    filetypes = { 'terraform', 'tf' },
+    cmd = { 'terraform-ls', 'serve' },
+    root_markers = { '.terraform', '.git' },
+  })
 
-    nvim_lsp['sqlls'].setup {
-        cmd = { "sql-language-server", "up", "--method", "stdio" },
-  --      on_attach = on_attach,
-        }
+  vim.lsp.config('sqlls', {
+    cmd = { 'sql-language-server', 'up', '--method', 'stdio' },
+  })
+
+  -- https://buf.build/docs/reference/cli/buf/lsp/
+  vim.lsp.enable({
+    'gopls',
+    'yamlls',
+    'bashls',
+    'pyright',
+    'buf_ls',
+    'clojure_lsp',
+    'texlab',
+    'efm',
+    'terraformls',
+    'sqlls',
+  })
 EOF
 
 lua << EOF

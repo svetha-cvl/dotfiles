@@ -7,6 +7,9 @@ call plug#begin()
 
 " Plug 'projekt0n/github-nvim-theme'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+" Provides the airline theme `catppuccin_<flavour>` (vim-airline-themes does
+" not ship one). See https://github.com/catppuccin/vim
+Plug 'catppuccin/vim', { 'as': 'catppuccin-vim' }
 
 " Plug 'HiPhish/nvim-ts-rainbow2' " this plugin is not working
 " Plug 'junegunn/rainbow_parentheses.vim'
@@ -52,7 +55,10 @@ Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'text' ] }
 Plug 'reedes/vim-pencil', { 'for': [ 'markdown', 'text' ] }
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Pinned to 'master' branch: the new 'main' branch is a full rewrite that
+" removes the require('nvim-treesitter.configs') API used below.
+" See https://github.com/nvim-treesitter/nvim-treesitter#readme
+Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }
 
 Plug 'github/copilot.vim'
 Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
