@@ -50,3 +50,4 @@ ln "$DOTFILES_ROOT/zsh/.zshrc.local.symlink" ~/.zshrc
 mkdir -p "$HOME/.cursor" "$HOME/.config/opencode"
 ln -snf "$DOTFILES_ROOT/ai/skills" "$HOME/.cursor/skills"
 ln -snf "$DOTFILES_ROOT/ai/skills" "$HOME/.config/opencode/skills"
+ln -snf "$DOTFILES_ROOT/ai/skills" "$HOME/.claude/skills"
