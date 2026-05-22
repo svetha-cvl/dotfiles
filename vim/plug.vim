@@ -49,6 +49,9 @@ Plug 'rcarriga/nvim-dap-ui'
 Plug 'leoluz/nvim-dap-go'
 Plug 'nvim-telescope/telescope-dap.nvim'
 
+Plug 'preservim/vimux'
+Plug 'vim-test/vim-test'
+
 " Plug 'camspiers/animate.vim'
 " Plug 'camspiers/lens.vim'
 

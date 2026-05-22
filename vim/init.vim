@@ -322,9 +322,6 @@ function ScratchBufferize()
 	setlocal noswapfile
 endfu
 
-"Requires moby thesaurus https://github.com/words/moby
-nnoremap <Leader>t :new \| read ! moby <C-R><C-W> \| tr , '\n' <CR>:call ScratchBufferize() <CR>:normal gg2dd <CR>
-
 let g:coq_settings = { 'auto_start': 'shut-up' }
 
 " -------------------- LSP ---------------------------------
