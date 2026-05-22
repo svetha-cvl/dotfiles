@@ -1,4 +1,29 @@
 #!/usr/bin/env bash
+#
+# dotfiles installer.
+#
+# Convention for tracked dotfiles (inspired by Zach Holman's dotfiles):
+#
+#   <dir>/<name>.symlink         <- TEMPLATE, version-controlled.
+#                                   May contain placeholder tokens like
+#                                   DOTFILES_ROOT / AUTHOR / *_EMAIL.
+#
+#   <dir>/<name>.local.symlink   <- GENERATED per-machine from the template
+#                                   by sed-substituting placeholders below.
+#                                   GITIGNORED via the *.local.* pattern in
+#                                   .gitignore. Never commit these; they
+#                                   bake in absolute paths and personal
+#                                   identity. Re-run this script to
+#                                   regenerate after editing the template.
+#
+#   ~/.<name>                    <- HARDLINK to <name>.local.symlink (or
+#                                   directly to <name>.symlink for files
+#                                   without placeholders, e.g. .p10k.zsh,
+#                                   .vimrc, .psqlrc).
+#
+# So the wire is: edit the template -> re-run install.sh -> live config
+# updates because ~/.<name> shares an inode with the regenerated artifact.
+
 DOTFILES_ROOT=$(pwd -P)
 
 if [ ! -f git/.gitconfig.local.symlink ]; then

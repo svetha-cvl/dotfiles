@@ -1,2 +1,11 @@
-# Don't check in local config
+# Generated machine-specific artifacts produced by install.sh from the
+# corresponding *.symlink templates. Examples:
+#   zsh/.zshrc.local.symlink       <- sed-substituted from zsh/.zshrc.symlink
+#                                     (replaces DOTFILES_ROOT with the absolute
+#                                     path to this clone)
+#   git/.gitconfig.local.symlink   <- sed-substituted from git/.gitconfig.symlink
+#                                     (replaces AUTHOR / PERSONAL_EMAIL with
+#                                     answers to install.sh prompts)
+# They contain machine-specific paths and/or personal identity, so each clone
+# regenerates its own copy. Never commit these. Re-run install.sh to recreate.
 *.local.*
