@@ -3,6 +3,26 @@ vim/
 ├── [init.vim](./init.vim) - neovim configuration   
 └── [plug.vim](./plug.vim) - neovim plugin configuration using [vim-plug](https://github.com/junegunn/vim-plug)
 
+### Neovim version
+**Supported: Neovim 0.11.x only (currently pinned to 0.11.7).**
+
+This config keeps `nvim-treesitter` on its `master` branch (see
+[plug.vim](./plug.vim)) so the existing `require('nvim-treesitter.configs').setup{}`
+block in `init.vim` keeps working. That branch is frozen upstream and
+explicitly does **not** support Neovim 0.12+ — running 0.12 produces a
+crash loop in the `conceal_line` decoration provider on every redraw.
+
+Don't install Neovim via Homebrew (it tracks latest only and will pull
+in 0.12). Use the official signed release tarball pinned to the latest
+0.11 patch and symlink it onto PATH. Full instructions and the
+underlying root cause are in
+[TROUBLESHOOTING.md §5](./TROUBLESHOOTING.md#5-nvim-treesitter-crash-on-neovim-012-attempt-to-call-method-range-a-nil-value).
+
+Moving to 0.12+ requires migrating `nvim-treesitter` to its `main`
+branch (a full rewrite that drops the `configs` API). See the "When
+can we move forward" subsection of TROUBLESHOOTING §5 for the concrete
+list of changes that migration entails.
+
 ### Plugin Manager
 ```sh
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \

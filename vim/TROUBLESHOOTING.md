@@ -250,3 +250,126 @@ python3.12 -c "from xml.parsers import expat; print('expat OK')"
 If you see `expat OK`, the `g:python3_host_prog` block becomes a no-op
 (it's guarded with `filereadable()` so it's safe to leave it; or just
 delete it).
+
+---
+
+## 5. `nvim-treesitter` crash on Neovim 0.12: `attempt to call method 'range' (a nil value)`
+
+### Symptom
+Repeated errors on every redraw (especially in markdown buffers with
+fenced code blocks), originating from the `conceal_line` decoration
+provider:
+
+```
+Decoration provider "conceal_line" (ns=nvim.treesitter.highlighter):
+Lua: .../neovim/0.12.2/share/nvim/runtime/lua/vim/treesitter.lua:196:
+  attempt to call method 'range' (a nil value)
+stack traceback:
+    .../runtime/lua/vim/treesitter.lua:196: in function 'get_range'
+    .../runtime/lua/vim/treesitter.lua:231: in function 'get_node_text'
+    ...nvim-treesitter/lua/nvim-treesitter/query_predicates.lua:141: in function 'handler'
+    .../runtime/lua/vim/treesitter/query.lua:868: in function '_apply_directives'
+    .../runtime/lua/vim/treesitter/query.lua:1089: in function '(for generator)'
+    .../runtime/lua/vim/treesitter/languagetree.lua:1123: in function '_get_injections'
+    .../runtime/lua/vim/treesitter/languagetree.lua:690: in function '_parse'
+    .../runtime/lua/vim/treesitter/languagetree.lua:639: in function 'parse'
+    .../runtime/lua/vim/treesitter/highlighter.lua:529: in function <...>
+```
+
+### Root cause
+`nvim-treesitter`'s `master` branch is **frozen** and explicitly
+**incompatible with Neovim 0.12**. Its README and support policy list
+0.10/0.11 only:
+
+> The `master` branch is frozen and provided for backward compatibility
+> only. … Neovim 0.10 or 0.11 (Neovim 0.12 is not supported).
+
+In Neovim 0.12, the treesitter query API changed so that `match[id]`
+returns a **list of nodes** instead of a single node. The
+`query_predicates.lua:141` directive handler on `master` still treats
+it as a single node and calls `vim.treesitter.get_node_text(node, ...)`
+on the list — `node:range()` is nil on a table, hence the crash. It's
+triggered by directives like `(#set! conceal_lines "")` on
+`fenced_code_block_delimiter`, which is why markdown files trip it
+constantly. See upstream issues
+[#8618](https://github.com/nvim-treesitter/nvim-treesitter/issues/8618)
+and [#8636](https://github.com/nvim-treesitter/nvim-treesitter/issues/8636),
+and Neovim
+[#39032](https://github.com/neovim/neovim/issues/39032).
+
+We're stuck on `master` because the new `main` branch is a full,
+incompatible rewrite that drops the `require('nvim-treesitter.configs')`
+API used in `init.vim` (see issue #1 above for the same trade-off in
+the other direction).
+
+### Fix
+Downgrade Neovim from 0.12.x to the latest 0.11 patch (0.11.7 at the
+time of writing), which `master` officially supports.
+
+The Homebrew `neovim` formula tracks latest only, so install the
+official signed release tarball under `~/.local/opt/` and shadow brew
+via a symlink in `~/.local/bin/` (already on PATH). This also
+side-steps the libexpat / Tahoe brew issue documented in section 4 by
+not depending on Homebrew at all.
+
+```bash
+# 1) Remove Homebrew's nvim
+brew uninstall neovim
+
+# 2) Download the official 0.11.7 release for Apple Silicon
+curl -fL -o /tmp/nvim-macos-arm64.tar.gz \
+  https://github.com/neovim/neovim/releases/download/v0.11.7/nvim-macos-arm64.tar.gz
+
+# 3) Install under $HOME (no sudo, no brew interference)
+mkdir -p ~/.local/opt
+rm -rf ~/.local/opt/nvim-macos-arm64
+tar -C ~/.local/opt -xzf /tmp/nvim-macos-arm64.tar.gz
+xattr -dr com.apple.quarantine ~/.local/opt/nvim-macos-arm64 2>/dev/null || true
+
+# 4) Symlink onto PATH (~/.local/bin is already in PATH for this shell)
+mkdir -p ~/.local/bin
+ln -sf ~/.local/opt/nvim-macos-arm64/bin/nvim ~/.local/bin/nvim
+hash -r
+
+# 5) Verify
+which nvim                # /Users/svetha/.local/bin/nvim
+nvim --version | head -1  # NVIM v0.11.7
+```
+
+Then inside Neovim, rebuild the treesitter parsers against 0.11 to be
+safe:
+
+```vim
+:PlugUpdate
+:TSUpdate
+:checkhealth nvim-treesitter
+```
+
+### Notes
+- This is a **deliberate downgrade**, not a fix on master. There is
+  no version of `nvim-treesitter` that supports both Neovim 0.12 *and*
+  the `nvim-treesitter.configs` API simultaneously.
+- The Python pin in section 4 is unaffected — that workaround was
+  about Homebrew Python on Tahoe, not Neovim itself, and is still
+  needed.
+- `/opt/homebrew/bin` is earlier in PATH than `~/.local/bin`, so the
+  symlink in `~/.local/bin/nvim` only wins after `brew uninstall
+  neovim` has cleared `/opt/homebrew/bin/nvim`. Don't skip step 1.
+
+### When can we move forward to Neovim 0.12+?
+Only by migrating `nvim-treesitter` to its new `main` branch, which
+means rewriting the treesitter setup in `init.vim`:
+
+- Replace `require('nvim-treesitter.configs').setup{}` with the
+  new `require('nvim-treesitter').setup{}` + `:TSInstall` /
+  `require('nvim-treesitter').install({...})` API.
+- Replace `set foldexpr=nvim_treesitter#foldexpr()` with
+  `set foldexpr=v:lua.vim.treesitter.foldexpr()`.
+- Enable highlight per buffer via `vim.treesitter.start()` in a
+  `FileType` autocmd (no more `highlight = { enable = true }` in
+  configs).
+- Bump `tree-sitter-cli` to `>= 0.26.1` (installed via package
+  manager, **not** npm).
+
+That migration is the proper long-term fix; defer it until you're
+ready to spend an evening on it.
