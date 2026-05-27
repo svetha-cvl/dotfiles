@@ -76,3 +76,10 @@ mkdir -p "$HOME/.cursor" "$HOME/.config/opencode"
 ln -snf "$DOTFILES_ROOT/ai/skills" "$HOME/.cursor/skills"
 ln -snf "$DOTFILES_ROOT/ai/skills" "$HOME/.config/opencode/skills"
 ln -snf "$DOTFILES_ROOT/ai/skills" "$HOME/.claude/skills"
+
+if command -v brew &>/dev/null; then
+    read -p 'Install Homebrew packages from Brewfile? [y/N] ' brew_bundle
+    if [[ "$brew_bundle" =~ ^[Yy]$ ]]; then
+        brew bundle install --file="$DOTFILES_ROOT/Brewfile"
+    fi
+fi
