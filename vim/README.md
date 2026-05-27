@@ -1,7 +1,31 @@
 vim/  
 ├── _[coc-settings.json](./coc-settings.json) [DEPRECATED for neovim lsp]_   
 ├── [init.vim](./init.vim) - neovim configuration   
+├── [local.vim.example](./local.vim.example) - template for machine-local overrides (see below)
 └── [plug.vim](./plug.vim) - neovim plugin configuration using [vim-plug](https://github.com/junegunn/vim-plug)
+
+`init.local.vim` (gitignored) holds per-machine settings such as private GitLab
+domains; it is not listed above because each clone creates its own copy.
+
+### Machine-local overrides
+
+Some settings are machine- or employer-specific and should not be committed
+(for example a private GitLab domain for `:GBrowse` via
+[vim-fugitive](https://github.com/tpope/vim-fugitive) and
+[fugitive-gitlab.vim](https://github.com/shumphrey/fugitive-gitlab.vim)).
+
+`init.vim` sources `init.local.vim` from the same directory when it exists.
+That file matches the repo's `*.local.*` gitignore rule.
+
+On a new machine:
+
+```sh
+cp vim/local.vim.example vim/init.local.vim
+# edit init.local.vim — set g:fugitive_gitlab_domains to your instance(s)
+```
+
+No `install.sh` changes are needed; because `~/.config/nvim/init.vim` is a
+symlink into this directory, the local file is picked up automatically.
 
 ### Neovim version
 **Supported: Neovim 0.11.x only (currently pinned to 0.11.7).**

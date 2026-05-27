@@ -1,0 +1,3 @@
+" Copy to init.local.vim and set your private GitLab instance(s).
+" init.local.vim is gitignored via the *.local.* rule in .gitignore.
+let g:fugitive_gitlab_domains = ['https://gitlab.example.com']

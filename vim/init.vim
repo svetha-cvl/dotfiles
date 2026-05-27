@@ -609,3 +609,10 @@ nnoremap <silent> ; <cmd>Telescope<cr>
 nnoremap <silent> ;d <cmd>Telescope dap commands<cr>
 nnoremap <silent> ;dv <cmd>Telescope dap variables<cr>
 nnoremap <silent> ;df <cmd>Telescope dap frames<cr>
+
+" Machine-local overrides (private GitLab domains, etc.)
+" See local.vim.example; copy to init.local.vim (gitignored).
+let s:local_init = expand('<sfile>:p:h') . '/init.local.vim'
+if filereadable(s:local_init)
+  execute 'source' fnameescape(s:local_init)
+endif

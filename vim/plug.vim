@@ -16,6 +16,7 @@ Plug 'catppuccin/vim', { 'as': 'catppuccin-vim' }
 Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim'
 
 Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
