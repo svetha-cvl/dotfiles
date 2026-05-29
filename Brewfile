@@ -98,6 +98,8 @@ brew "k9s"
 brew "kubectx"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
+# Lazier way to manage everything docker
+brew "lazydocker"
 # Build tool for Clojure
 brew "leiningen"
 # Library for JPEG-2000 image manipulation
@@ -130,6 +132,8 @@ brew "ripgrep"
 brew "opencode"
 # Simplistic interactive filtering tool
 brew "peco"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
 # Tool for managing OCI containers and pods
 brew "podman"
 # PDF rendering library (based on the xpdf-3.0 code base)
@@ -208,6 +212,7 @@ go "github.com/fatih/motion"
 go "github.com/mgechev/revive"
 go "honnef.co/go/tools/cmd/staticcheck"
 cargo "texlab"
+uv "code-review-graph"
 npm "bash-language-server"
 npm "pyright"
 npm "sql-language-server"
