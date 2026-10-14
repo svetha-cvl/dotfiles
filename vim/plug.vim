@@ -70,5 +70,12 @@ Plug 'olimorris/codecompanion.nvim'
 
 Plug 'folke/which-key.nvim'
 
+" Blink uses a prebuilt binary for the fuzzy matcher which will be downloaded automatically when on a tag
+" v2 has breaking changes. Stayt on the stable v1 tag for now
+Plug 'saghen/blink.cmp', { 'tag': 'v1.*' }
+
+" optional to use with blink-cmp: provides snippets for the snippet source
+Plug 'rafamadriz/friendly-snippets'
+
 " Initialize plugin system
 call plug#end()

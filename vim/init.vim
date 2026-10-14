@@ -448,6 +448,34 @@ lua << EOF
 EOF
 
 lua << EOF
+-- Reference: https://cmp.saghen.dev/configuration/general.html
+require('blink.cmp').setup({
+  keymap = { preset = 'default' },
+  appearance = {
+    nerd_font_variant = 'mono'
+  },
+  completion = {
+    -- 'prefix' will fuzzy match on the text before the cursor
+    -- 'full' will fuzzy match on the text before _and_ after the cursor
+    -- example: 'foo_|_bar' will match 'foo_' for 'prefix' and 'foo__bar' for 'full'
+    keyword = { range = 'full' },
+    -- Show documentation when selecting a completion item
+    documentation = { auto_show = false },
+    -- Don't select by default, auto insert on selection
+    list = { selection = { preselect = false, auto_insert = true } },
+    -- Display a preview of the selected item on the current line
+    ghost_text = { enabled = true },
+  },
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+  },
+  fuzzy = {
+    implementation = "prefer_rust_with_warning"
+  }
+})
+EOF
+
+lua << EOF
     require'nvim-treesitter.configs'.setup {
     -- treesitter requires the following parsers to always be installed
     ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
