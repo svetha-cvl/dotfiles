@@ -76,6 +76,7 @@ https://github.com/catppuccin/catppuccin
     - npm i -g pyright
     - brew install hashicorp/tap/terraform-ls
     - npm i -g sql-language-server
+    - npm install -g typescript typescript-language-server
 
 ### Treesitter Parsers
 - Install these manually using `:TSInstall <parser>`

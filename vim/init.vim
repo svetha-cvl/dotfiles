@@ -444,6 +444,7 @@ lua << EOF
     'efm',
     'terraformls',
     'sqlls',
+    'ts_ls'
   })
 EOF
 
